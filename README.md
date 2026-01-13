@@ -2,7 +2,7 @@
 
 レイヤードアーキテクチャを採用したNext.js テンプレートリポジトリです。
 
-## 🚀 Tech Stack
+## 技術スタック
 
 | カテゴリ | 技術 |
 |---------|------|
@@ -16,7 +16,7 @@
 | **Linter/Formatter** | Biome |
 | **Package Manager** | pnpm |
 
-## 📁 ディレクトリ構造
+## ディレクトリ構造
 
 ```
 src/
@@ -36,7 +36,7 @@ src/
     └── api/               # Zod validation schemas
 ```
 
-## 🏗️ Architecture
+## Architecture
 
 レイヤードアーキテクチャに基づく責務分離:
 
@@ -45,7 +45,7 @@ src/
 3. **Application (Service)**: `src/services/...` - Business Logic
 4. **Domain/Infra**: `src/db/schema.ts`, `src/repositories/...` - Drizzle ORM
 
-## 🛠️ セットアップ
+## セットアップ
 
 ### 1. 依存関係のインストール
 
@@ -64,17 +64,14 @@ cp .env.example .env.local
 ### 3. データベースのセットアップ
 
 ```bash
-# スキーマをDBにプッシュ
-pnpm db:push
+pnpm run db:push
 ```
 
 ### 4. 開発サーバーの起動
 
 ```bash
-pnpm dev
+pnpm run dev
 ```
-
-[http://localhost:3000](http://localhost:3000) でアプリケーションにアクセスできます。
 
 
 ### 5. Claude Code / MCP Setup (Optional)
@@ -91,30 +88,32 @@ $configPath = "$env:APPDATA\Claude\claude_desktop_config.json"
 **推奨MCPサーバー:**
 - `context7`: Next.js/Better-auth の最新ドキュメント参照
 - `mysql`: データベースの操作
-- `puppeteer`: Playwright テスト作成支援
+- `next-devtools`: Next.js アプリケーションの状態監視
+- `brave-search`: トラブルシューティング（APIキーが必要）
+
 
 ## 📝 コマンド一覧
 
 
 | コマンド | 説明 |
 |----------|------|
-| `pnpm dev` | 開発サーバー起動 (Turbopack) |
-| `pnpm build` | プロダクションビルド |
-| `pnpm start` | プロダクションサーバー起動 |
-| `pnpm lint` | Biome によるコードチェック・自動修正 |
-| `pnpm test` | Vitest によるユニットテスト |
-| `pnpm test:ui` | Vitest UI でテスト実行 |
-| `pnpm playwright` | Playwright による E2E テスト |
-| `pnpm typecheck` | TypeScript 型チェック |
-| `pnpm db:generate` | Drizzle マイグレーション生成 |
-| `pnpm db:push` | スキーマを DB にプッシュ |
+| `pnpm run dev` | 開発サーバー起動 (Turbopack) |
+| `pnpm run build` | プロダクションビルド |
+| `pnpm run start` | プロダクションサーバー起動 |
+| `pnpm run lint` | Biome によるコードチェック・自動修正 |
+| `pnpm run test` | Vitest によるユニットテスト |
+| `pnpm run test:ui` | Vitest UI でテスト実行 |
+| `pnpm run playwright` | Playwright による E2E テスト |
+| `pnpm run typecheck` | TypeScript 型チェック |
+| `pnpm run db:generate` | Drizzle マイグレーション生成 |
+| `pnpm run db:push` | スキーマを DB にプッシュ |
 
 ## 🧪 テスト
 
 ### ユニットテスト
 
 ```bash
-pnpm test
+pnpm run test
 ```
 
 ### E2E テスト
@@ -124,7 +123,7 @@ pnpm test
 npx playwright install
 
 # E2E テスト実行
-pnpm playwright
+pnpm run playwright
 ```
 
 ## 📚 関連ドキュメント
