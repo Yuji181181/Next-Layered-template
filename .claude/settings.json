@@ -1,22 +1,22 @@
 {
-	"commands": {
-		"workflow": "commands/workflow.md",
-		"spec": "commands/spec.md",
-		"pr-create": "commands/pr-create.md"
-	},
-	"trustedTools": ["bash", "gh", "coderabbit", "pnpm"],
-	"autoFix": true,
-	"hooks": {
-		"PostToolUse": [
-			{
-				"matcher": "Write|Edit",
-				"hooks": [
-					{
-						"type": "command",
-						"command": "pnpm biome check --apply $FILE"
-					}
-				]
-			}
-		]
-	}
+  "commands": {
+    "workflow": "commands/workflow.md",
+    "spec": "commands/spec.md",
+    "pr-create": "commands/pr-create.md"
+  },
+  "trustedTools": ["bash", "gh", "coderabbit", "pnpm"],
+  "autoFix": true,
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "pnpm biome check --apply $FILE"
+          }
+        ]
+      }
+    ]
+  }
 }

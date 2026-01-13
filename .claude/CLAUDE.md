@@ -45,6 +45,31 @@
 - **`src/services`**: ビジネスロジック
 - **`src/repositories`**: DB操作
 
+### Directory Structure Tree
+```text
+src/
+├── app/                  # ルーティングとAPIエンドポイント
+│   ├── (routes)/         # 画面ページ (layout.tsx, page.tsx)
+│   └── api/              # API Route Handlers (Interface Layer)
+│       └── [resource]/
+│           └── route.ts
+├── components/           # Reactコンポーネント
+│   ├── common/           # 汎用パーツ (Button, Input, Modal)
+│   │   └── Button.tsx
+│   └── domain/           # ドメイン機能パーツ
+│       ├── auth/
+│       │   └── LoginForm.tsx
+│       └── user/
+│           └── UserCard.tsx
+├── hooks/                # カスタムフック (useFormInput.ts など)
+├── services/             # ビジネスロジック (src直下)
+├── repositories/         # DB操作 (src直下)
+├── db/                   # DB設定
+├── lib/                  # Utils
+├── schema/               # Zod
+└── types/                # TypeScript型
+```
+
 ## 4. Operation Commands
 - **Test (Unit)**: `pnpm test` (or `pnpm vitest`)
 - **Test (E2E)**: `pnpm playwright test`

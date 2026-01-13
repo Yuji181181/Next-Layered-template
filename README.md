@@ -1,138 +1,93 @@
 # Next.js Layered Template
 
-レイヤードアーキテクチャを採用したNext.js テンプレートリポジトリです。
+レイヤードアーキテクチャを採用したNext.jsのテンプレートリポジトリ
 
 ## 技術スタック
 
-| カテゴリ | 技術 |
-|---------|------|
-| **Framework** | Next.js 16 (App Router) |
-| **Database** | TiDB / MySQL + Drizzle ORM |
-| **Auth** | Better-auth |
-| **Validation** | Zod |
-| **Styling** | TailwindCSS (Pure) |
-| **State/Fetching** | SWR |
-| **Testing** | Vitest + Playwright |
-| **Linter/Formatter** | Biome |
-| **Package Manager** | pnpm |
+### Backend / Database
+- **Framework**: Next.js 16 (App Router) - Route Handlers
+- **Database**: TiDB (MySQL)
+- **ORM**: Drizzle ORM
+- **Auth**: Better-auth
+- **Validation**: Zod
 
-## ディレクトリ構造
+### Frontend
+- **Styling**: TailwindCSS
+- **State/Fetching**: SWR
+- **Component Logic**: React Hooks pattern
 
-```
-src/
-├── app/
-│   ├── (routes)/          # Presentation Layer - Pages
-│   └── api/               # Interface Layer - Route Handlers
-├── components/
-│   ├── common/            # 汎用UIパーツ (Button, Input等)
-│   └── domain/            # 機能単位コンポーネント
-├── db/
-│   ├── index.ts           # Drizzle DB instance
-│   └── schema.ts          # Drizzle schema definitions
-├── hooks/                 # カスタムフック (useXxx.ts)
-├── repositories/          # Infrastructure Layer - DB操作
-├── services/              # Application Layer - ビジネスロジック
-└── schema/
-    └── api/               # Zod validation schemas
-```
+### Testing & Quality
+- **Unit/Integration**: Vitest
+- **E2E**: Playwright
+- **Linter/Formatter**: Biome
+- **Type Checking**: TypeScript (Strict)
 
-## Architecture
+### Tools & Environment
+- **Package Manager**: pnpm
+- **MCP Servers**: context7, mysql, next-devtools, brave-search, puppeteer
 
-レイヤードアーキテクチャに基づく責務分離:
+## Architecture & Directory Rules
 
-1. **Presentation (Frontend)**: `app/(routes)/...` - UI & SWR
-2. **Interface (API)**: `app/api/...` - Route Handlers, Validation, Auth
-3. **Application (Service)**: `src/services/...` - Business Logic
-4. **Domain/Infra**: `src/db/schema.ts`, `src/repositories/...` - Drizzle ORM
+### Layered Architecture Responsibilities
+以下の責務分離を厳守する構成
 
-## セットアップ
+1. **Presentation (Frontend)**: `app/(routes)/...` (UI & SWR)
+2. **Interface (API)**: `app/api/...` (Route Handlers, Validation, Auth)
+3. **Application (Service)**: `src/services/...` (Business Logic, Transaction)
+4. **Domain/Infra**: `src/db/schema.ts`, `src/repositories/...` (Drizzle)
 
-### 1. 依存関係のインストール
+### Directory Structure
+- **`src/components/common`**: 汎用UIパーツ（Button, Input等）。Pure Tailwindで実装
+- **`src/components/domain`**: 機能単位のコンポーネント
+- **`src/hooks`**: ロジックを切り出したカスタムフック
+- **`src/services`**: ビジネスロジック
+- **`src/repositories`**: DB操作
 
+## Setup
+
+### 1. Install Dependencies
 ```bash
 pnpm install
 ```
 
-### 2. 環境変数の設定
-
+### 2. Environment Variables
 ```bash
 cp .env.example .env.local
 ```
+`.env.local` を編集して `DATABASE_URL` 等を設定してください
 
-`.env.local` を編集して、データベース接続情報を設定してください。
-
-### 3. データベースのセットアップ
-
+### 3. Database Setup
 ```bash
 pnpm run db:push
 ```
 
-### 4. 開発サーバーの起動
+### 4. Configure MCP Servers (For Claude Code)
+MCPサーバーを設定してください
+プロジェクトルートの `.claude/mcp.json` を参考に、Claudeの設定ファイルに追記します
 
-```bash
-pnpm run dev
-```
+MCPサーバー:
+- `context7`: 最新ドキュメント参照
+- `mysql`: DB操作・事実確認
+- `next-devtools`: アプリ状態監視
+- `brave-search`: トラブルシューティング
 
-
-### 5. Claude Code / MCP Setup (Optional)
-
-Claude Code を使用して開発する場合、MCPサーバーを設定することで Context7 や MySQL ツールを利用できます。
-プロジェクトルートにある `.claude/mcp.json` の内容を Claude の設定ファイルに追加してください。
-
-**Windows (PowerShell):**
-```powershell
-$configPath = "$env:APPDATA\Claude\claude_desktop_config.json"
-# 手動で設定を追加するか、必要なツールを選択してインストールしてください
-```
-
-**推奨MCPサーバー:**
-- `context7`: Next.js/Better-auth の最新ドキュメント参照
-- `mysql`: データベースの操作
-- `next-devtools`: Next.js アプリケーションの状態監視
-- `brave-search`: トラブルシューティング（APIキーが必要）
-
-
-## 📝 コマンド一覧
-
+## Operation Commands
 
 | コマンド | 説明 |
 |----------|------|
-| `pnpm run dev` | 開発サーバー起動 (Turbopack) |
+| `pnpm run dev` | 開発サーバー起動|
 | `pnpm run build` | プロダクションビルド |
-| `pnpm run start` | プロダクションサーバー起動 |
 | `pnpm run lint` | Biome によるコードチェック・自動修正 |
-| `pnpm run test` | Vitest によるユニットテスト |
-| `pnpm run test:ui` | Vitest UI でテスト実行 |
-| `pnpm run playwright` | Playwright による E2E テスト |
 | `pnpm run typecheck` | TypeScript 型チェック |
-| `pnpm run db:generate` | Drizzle マイグレーション生成 |
-| `pnpm run db:push` | スキーマを DB にプッシュ |
+| `pnpm run db:push` | DBスキーマの適用 |
+| `pnpm run test` | ユニットテスト・統合テスト (Vitest) |
+| `pnpm run playwright` | E2Eテスト (Playwright) |
 
-## 🧪 テスト
+## Testing Strategy
 
-### ユニットテスト
+このプロジェクトでは、**統合テスト**と**E2Eテスト**を重視します。
 
-```bash
-pnpm run test
-```
-
-### E2E テスト
-
-```bash
-# Playwright ブラウザをインストール
-npx playwright install
-
-# E2E テスト実行
-pnpm run playwright
-```
-
-## 📚 関連ドキュメント
-
-- [設計ドキュメント (SPEC)](./docs/SPEC.md)
-- [Next.js Documentation](https://nextjs.org/docs)
-- [Drizzle ORM Documentation](https://orm.drizzle.team)
-- [Biome Documentation](https://biomejs.dev)
-
-## 📄 License
-
-MIT
+1. **統合テスト (Vitest)**: `pnpm run test`
+   - API/Service層と実際のDBとの連携検証
+2. **E2Eテスト (Playwright)**: `pnpm run playwright`
+   - ブラウザを通じたユーザーストーリー検証
