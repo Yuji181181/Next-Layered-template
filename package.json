@@ -9,7 +9,7 @@
 		"lint": "biome check --write .",
 		"test": "vitest run",
 		"test:ui": "vitest --ui",
-		"playwright": "playwright test",
+		"playwright": "npx playwright test",
 		"typecheck": "tsc --noEmit",
 		"db:generate": "drizzle-kit generate",
 		"db:push": "drizzle-kit push"

@@ -76,7 +76,25 @@ pnpm dev
 
 [http://localhost:3000](http://localhost:3000) でアプリケーションにアクセスできます。
 
+
+### 5. Claude Code / MCP Setup (Optional)
+
+Claude Code を使用して開発する場合、MCPサーバーを設定することで Context7 や MySQL ツールを利用できます。
+プロジェクトルートにある `.claude/mcp.json` の内容を Claude の設定ファイルに追加してください。
+
+**Windows (PowerShell):**
+```powershell
+$configPath = "$env:APPDATA\Claude\claude_desktop_config.json"
+# 手動で設定を追加するか、必要なツールを選択してインストールしてください
+```
+
+**推奨MCPサーバー:**
+- `context7`: Next.js/Better-auth の最新ドキュメント参照
+- `mysql`: データベースの操作
+- `puppeteer`: Playwright テスト作成支援
+
 ## 📝 コマンド一覧
+
 
 | コマンド | 説明 |
 |----------|------|
