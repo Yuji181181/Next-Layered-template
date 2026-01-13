@@ -37,11 +37,29 @@
 4. **Domain/Infra**: `src/db/schema.ts`, `src/repositories/...` (Drizzle)
 
 ### Directory Structure
-- **`src/components/common`**: 汎用UIパーツ（Button, Input等）。Pure Tailwindで実装
-- **`src/components/domain`**: 機能単位のコンポーネント
-- **`src/hooks`**: ロジックを切り出したカスタムフック
-- **`src/services`**: ビジネスロジック
-- **`src/repositories`**: DB操作
+```text
+src/
+├── app/                  # ルーティングとAPIエンドポイント
+│   ├── (routes)/         # 画面ページ (layout.tsx, page.tsx)
+│   └── api/              # API Route Handlers (Interface Layer)
+│       └── [resource]/
+│           └── route.ts
+├── components/           # Reactコンポーネント
+│   ├── common/           # 汎用パーツ (Button, Input, Modal)
+│   │   └── Button.tsx
+│   └── domain/           # ドメイン機能パーツ
+│       ├── auth/
+│       │   └── LoginForm.tsx
+│       └── user/
+│           └── UserCard.tsx
+├── hooks/                # カスタムフック (useFormInput.ts など)
+├── services/             # ビジネスロジック
+├── repositories/         # DB操作
+├── db/                   # DB設定
+├── lib/                  # Utils
+├── schema/               # Zod
+└── types/                # TypeScript型
+```
 
 ## Setup
 
