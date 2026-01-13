@@ -1,0 +1,11 @@
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+.next
+node_modules
+dist
+build
+coverage
+tscompat
+# CSS files (Tailwind v4 syntax not supported by Biome CSS parser)
+**/*.css
